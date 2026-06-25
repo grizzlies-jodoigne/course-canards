@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- META Open Graph pour l'aperçu du lien -->
+<meta property="og:title" content="Course de Canards - Grizzlies Dodgeball Club de Jodoigne" />
+<meta property="og:description" content="Réservez votre canard pour notre grande course à Jodoigne ! 🐥" />
+<meta property="og:image" content="https://grizzliesdodgeballclubjodoigne.github.io/course-canards/img/logo-course.png" />
+<meta property="og:url" content="https://grizzliesdodgeballclubjodoigne.github.io/course-canards/" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Cards (optionnel) -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Course de Canards - Grizzlies" />
+<meta name="twitter:description" content="Réservez votre canard pour notre grande course à Jodoigne !" />
+<meta name="twitter:image" content="https://grizzliesdodgeballclubjodoigne.github.io/course-canards/img/logo-course.png" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course de Canards</title>
+<link rel="icon" href="img/logo-course.png">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Feuille de styles séparée -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Le Grizzlies Dodgeball Club de Jodoigne</h1>
+  <div style="margin: 15px 0;">
+    <img src="img/logo-grizzlies.png" alt="Logo Grizzlies" style="height: 100px;">
+  </div>
+  <p>organise la</p>
+</header>
+
+  <!-- AUDIO -->
+  <audio id="duck-sound" src="img/SF-coin.mp3" preload="auto"></audio>
+
+  <!-- SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("reserve-button");
+      const duckSound = document.getElementById("duck-sound");
+
+      btn.addEventListener("click", function () {
+        duckSound.currentTime = 0;
+        duckSound.play();
+      });
+    });
+  </script>
+<!-- Bloc héro : affiche entière + bandeau d'appel à l'action -->
+<section class="hero">
+  <img class="hero-poster" src="img/affiche-course.png"
+       alt="Affiche – Course des Canards, 6ème édition">
+  <div class="hero-cta">
+    <h2>Course de Canards</h2>
+    <p class="hero-sous-titre">5ᵉ édition · <span class="prix-canard">2 €</span>/mise — nombreux prix pour le podium — Entrée libre !</p>
+      <a href="#reserve" class="reserve-button" id="reserve-button">🐥 Réserver mon canard</a>
+    </div>
+</section>
+
+
+<div class="info">
+  <h3>Rendez-vous à la Stampia, Jodoigne le 23/08 à 15h</h3>
+</div>
+
+<footer>
+  <img src="img/logo-canard.png" alt="" class="footer-mascotte">
+  <p>&copy; 2026 Grizzlies Dodgeball Club</p>
+</footer>
+
+<!-- Modale principale : sélection et formulaire -->
+<div id="duckModal">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="duckModalTitle" tabindex="-1">
+    <span class="close" id="closeModal" role="button" tabindex="0" aria-label="Fermer">&times;</span>
+    <h3 id="duckModalTitle">Choisissez vos canards (<span class="prix-canard">2 €</span> chacun)</h3>
+    <!-- Message affiché si le chargement des disponibilités échoue -->
+    <p id="loadError" style="display:none; color:#b00020; font-weight:bold;">
+      Impossible de charger la disponibilité des canards. Réessayez avant de réserver.
+      <button type="button" id="retryLoad">Réessayer</button>
+    </p>
+    <!-- Indicateur affiché pendant l'appel à chargerStatuts() -->
+    <p id="loadingIndicator" style="display:none;">Chargement des disponibilités…</p>
+    <div id="modalBody">
+    <!-- Image avec les canards -->
+    <div class="duck-grid" id="duckGrid">
+      <img src="img/320-canards-jaunes.png" alt="320 canards">
+    </div>
+    <!-- Récapitulatif des sélections -->
+    <div id="selection">
+      Canards sélectionnés : <span id="selectedNumbers">aucun</span><br>
+      Total : <span id="totalCost">0 €</span>
+    </div>
+    <!-- Formulaire de paiement -->
+    <form id="commandeForm">
+    <div id="paiement">
+      <fieldset>
+        <legend>Méthode de paiement :</legend>
+        <label><input type="radio" name="paiement" value="virement" checked> Par virement</label><br>
+        <label><input type="radio" name="paiement" value="espece"> En espèces le jour de l'évènement</label>
+      </fieldset>
+
+      <p style="margin-top:10px;">
+        <label>Votre e‑mail :<br>
+          <input type="email" id="email" required style="width:100%; padding:5px;">
+        </label>
+      </p>
+      <!-- Coordonnées -->
+  <p>
+    <label>Votre prénom :<br>
+      <input type="text" id="prenom" required style="width:100%; padding:5px;">
+    </label>
+  </p>
+  <p>
+    <label>Votre nom :<br>
+      <input type="text" id="nom" required style="width:100%; padding:5px;">
+    </label>
+  </p>
+      <p>
+  <label><input type="checkbox" id="participation"> Je serai présent au départ de la course.</label>
+  </p>
+
+      <p><label><input type="checkbox" id="notifyCheckbox"> Envoyez‑moi un mail l'année prochaine pour me prévenir de la 6ᵉ édition.</label></p>
+      <p><label><input type="checkbox" id="initiation"> J'ai envie de participer à une séance (gratuite) d'initiations au Dodgeball !</label></p>
+    </div>
+    <p class="rgpd">
+      Vos nom, prénom et e‑mail sont utilisés uniquement par le Grizzlies Dodgeball
+      Club de Jodoigne pour gérer votre réservation et vous envoyer la confirmation.
+      Ils ne sont ni revendus ni transmis à des tiers. Si vous cochez la case ci‑dessus,
+      votre e‑mail est conservé pour vous prévenir de l'édition suivante. Pour toute
+      demande de suppression de vos données, écrivez‑nous à
+      <a href="mailto:grizzliesdodgeballclubjodoigne@gmail.com">grizzliesdodgeballclubjodoigne@gmail.com</a>.
+    </p>
+    <button id="finaliser" type="submit">Finaliser ma commande</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modale de confirmation -->
+<div id="confirmModal">
+  <div class="content" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle" tabindex="-1">
+    <span class="close" id="closeConfirm" role="button" tabindex="0" aria-label="Fermer">&times;</span>
+    <h3 id="confirmModalTitle">Confirmation de votre commande</h3>
+    <p id="confirmText"></p>
+  </div>
+</div>
+
+<!-- Script séparé -->
+<script src="commande.js"></script>
+
+</body>
+</html>

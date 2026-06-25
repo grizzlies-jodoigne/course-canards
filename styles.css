@@ -1,0 +1,337 @@
+/* Palette dérivée de l'affiche (bannière crème, titre bleu marine,
+   canards jaunes à bec orange, ciel/eau bleus, feuillage vert). */
+:root {
+  --bleu: #21466E;
+  --bleu-fonce: #1B3A5C;
+  --jaune: #F6C61C;
+  --jaune-clair: #FBD24E;
+  --orange: #E8860C;
+  --orange-hover: #CF7409;
+  --ciel: #8FC7E8;
+  --vert: #5A9E4B;
+  --creme: #FBF4DD;
+  --carte: #FFFDF5;
+  --texte: #33363B;
+  --texte-doux: #6B6B6B;
+  --ombre: 0 4px 14px rgba(27, 58, 92, 0.12);
+}
+
+/* Style global */
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background: var(--creme);
+  color: var(--texte);
+}
+
+/* En-tête */
+header {
+  background: linear-gradient(180deg, var(--jaune-clair), var(--jaune));
+  text-align: center;
+  padding: 24px 20px;
+  color: var(--bleu);
+  font-family: 'Fredoka One', cursive;
+  box-shadow: var(--ombre);
+}
+header h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+header p {
+  margin: 5px 0 0;
+  font-size: 1.5em;
+}
+
+/* Héro : affiche entière (jamais rognée) + bandeau d'appel à l'action */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 20px 0;
+}
+.hero-poster {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: var(--ombre);
+}
+.hero-cta {
+  background: var(--carte);
+  border-radius: 16px;
+  box-shadow: var(--ombre);
+  padding: 28px 32px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.hero-cta h2 {
+  font-family: 'Fredoka One', cursive;
+  color: var(--bleu);
+  font-size: 2.4em;
+  margin: 0 0 8px;
+}
+.hero-sous-titre {
+  font-size: 1.2em;
+  color: var(--texte);
+  margin: 0 0 20px;
+}
+
+/* Bouton de réservation : orange bec de canard, contraste fort avec le header */
+.reserve-button {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 700;
+  padding: 16px 34px;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 6px 16px rgba(232, 134, 12, 0.35);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.reserve-button:hover {
+  background: var(--orange-hover);
+  transform: translateY(-2px);
+}
+
+/* Bloc d'informations — même largeur/cadre que le bandeau CTA du héro.
+   width:calc(100% - 40px) reproduit les marges latérales de 20px que le
+   bandeau CTA hérite du padding de .hero, pour une largeur identique sur
+   mobile comme sur desktop. */
+.info {
+  max-width: 600px;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+  margin: 24px auto 0;
+  text-align: center;
+  background: var(--carte);
+  padding: 28px 32px;
+  border-radius: 16px;
+  box-shadow: var(--ombre);
+}
+.info h3 {
+  font-family: 'Fredoka One', cursive;
+  color: var(--bleu);
+  font-size: 2em;
+  margin: 0;
+}
+
+/* Pied de page */
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--texte-doux);
+  margin: 24px 0;
+}
+.footer-mascotte {
+  height: 200px;
+  width: auto;
+  display: block;
+  margin: 0 auto 16px;
+}
+footer p {
+  margin: 0;
+}
+
+/* Modale de sélection des canards */
+#duckModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: rgba(27, 58, 92, 0.8);
+}
+#duckModal .modal-content {
+  background: var(--carte);
+  margin: 5% auto;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 900px;
+  position: relative;
+  box-shadow: var(--ombre);
+}
+#duckModal h3,
+#confirmModal h3 {
+  font-family: 'Fredoka One', cursive;
+  color: var(--bleu);
+}
+#duckModal .close,
+#confirmModal .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.8em;
+  line-height: 1;
+  color: var(--bleu);
+  cursor: pointer;
+}
+#duckModal .close:focus,
+#confirmModal .close:focus {
+  outline: 2px solid var(--bleu);
+  outline-offset: 2px;
+}
+
+/* Groupe de paiement : fieldset natif sans bordure visible, le legend
+   reprend le style du texte qu'il remplace. */
+#paiement fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+#paiement legend {
+  font-weight: 700;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+/* Mention RGPD : note discrète sous le formulaire */
+.rgpd {
+  margin: 16px 0 0;
+  font-size: 0.82em;
+  line-height: 1.4;
+  color: var(--texte-doux);
+}
+.rgpd a {
+  color: var(--bleu);
+}
+
+/* Bouton « Finaliser ma commande » : cohérent avec le CTA principal */
+#finaliser {
+  margin-top: 15px;
+  padding: 12px 28px;
+  font-size: 1.2em;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(232, 134, 12, 0.3);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+#finaliser:hover {
+  background: var(--orange-hover);
+  transform: translateY(-1px);
+}
+
+/* Grille des canards (positionnement piloté par commande.js — ne pas modifier) */
+.duck-grid {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.duck-grid img {
+  width: 100%;
+  display: block;
+}
+.duck {
+  position: absolute;
+  cursor: pointer;
+}
+.duck.reserved {
+  background: rgba(196, 30, 30, 0.45);
+  pointer-events: none;
+}
+.duck.selected {
+  background: rgba(90, 158, 75, 0.5);
+  box-shadow: inset 0 0 0 2px var(--vert);
+}
+
+/* Zone de sélection */
+#selection {
+  margin-top: 15px;
+  font-size: 1.1em;
+}
+#selection span {
+  font-weight: 700;
+  color: var(--bleu);
+}
+
+/* Modale de confirmation */
+#confirmModal {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(27, 58, 92, 0.8);
+}
+#confirmModal .content {
+  background: var(--carte);
+  margin: 10% auto;
+  padding: 24px;
+  max-width: 600px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: var(--ombre);
+}
+
+/* Adaptation mobile : le héro est désormais fluide (affiche en max-width,
+   bandeau CTA dessous), plus aucun calage en pixels à recaler. */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8em;
+  }
+  header p {
+    font-size: 1.1em;
+  }
+
+  .hero {
+    padding: 20px 20px 0;
+    gap: 18px;
+  }
+  .hero-cta,
+  .info {
+    padding: 20px;
+  }
+  .hero-cta h2 {
+    font-size: 1.9em;
+  }
+  .hero-sous-titre {
+    font-size: 1.05em;
+  }
+
+  #duckModal .modal-content {
+    margin: 2% auto;
+    max-width: 95%;
+    padding: 14px;
+  }
+
+  #confirmModal .content {
+    margin: 5% auto;
+    max-width: 90%;
+  }
+
+  .info h3 {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4em;
+  }
+  .hero-poster {
+    max-width: 100%;
+  }
+  .hero-cta h2 {
+    font-size: 1.5em;
+  }
+  .reserve-button {
+    font-size: 1.15em;
+    padding: 14px 26px;
+  }
+  .info h3 {
+    font-size: 1.3em;
+  }
+}
