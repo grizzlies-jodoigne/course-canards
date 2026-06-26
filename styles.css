@@ -1,8 +1,9 @@
-/* Palette dérivée de l'affiche (bannière crème, titre bleu marine,
-   canards jaunes à bec orange, ciel/eau bleus, feuillage vert). */
+/* Palette dérivée de l'affiche finale (titre brun chaud, canards jaunes à
+   bec orange, rivière et feuillage verts). La couleur d'écriture (--brun)
+   reprend le brun du titre « COURSE AUX CANARDS » de l'affiche. */
 :root {
-  --bleu: #21466E;
-  --bleu-fonce: #1B3A5C;
+  --brun: #3D2A19;
+  --brun-fonce: #2A1D10;
   --jaune: #F6C61C;
   --jaune-clair: #FBD24E;
   --orange: #E8860C;
@@ -13,7 +14,7 @@
   --carte: #FFFDF5;
   --texte: #33363B;
   --texte-doux: #6B6B6B;
-  --ombre: 0 4px 14px rgba(27, 58, 92, 0.12);
+  --ombre: 0 4px 14px rgba(61, 42, 25, 0.14);
 }
 
 /* Style global */
@@ -28,7 +29,7 @@ body {
 header {
   position: relative;
   background: linear-gradient(180deg, var(--jaune-clair), var(--jaune));
-  color: var(--bleu);
+  color: var(--brun);
   font-family: 'Fredoka One', cursive;
   padding: 28px 20px 64px;
 }
@@ -58,7 +59,7 @@ header {
   font-size: 1.05em;
   font-weight: 600;
   font-family: 'Nunito', sans-serif;
-  color: var(--bleu-fonce);
+  color: var(--brun-fonce);
 }
 /* Vague décorative : la couleur reprend le fond crème du contenu, pour une
    transition douce entre le header jaune et l'affiche. */
@@ -102,7 +103,7 @@ header {
 }
 .hero-cta h2 {
   font-family: 'Fredoka One', cursive;
-  color: var(--bleu);
+  color: var(--brun);
   font-size: 2.4em;
   margin: 0 0 8px;
 }
@@ -147,7 +148,7 @@ header {
 }
 .info h3 {
   font-family: 'Fredoka One', cursive;
-  color: var(--bleu);
+  color: var(--brun);
   font-size: 2em;
   margin: 0;
 }
@@ -179,7 +180,7 @@ footer p {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background: rgba(27, 58, 92, 0.8);
+  background: rgba(40, 28, 15, 0.8);
 }
 #duckModal .modal-content {
   background: var(--carte);
@@ -193,7 +194,7 @@ footer p {
 #duckModal h3,
 #confirmModal h3 {
   font-family: 'Fredoka One', cursive;
-  color: var(--bleu);
+  color: var(--brun);
 }
 #duckModal .close,
 #confirmModal .close {
@@ -202,12 +203,12 @@ footer p {
   right: 20px;
   font-size: 1.8em;
   line-height: 1;
-  color: var(--bleu);
+  color: var(--brun);
   cursor: pointer;
 }
 #duckModal .close:focus,
 #confirmModal .close:focus {
-  outline: 2px solid var(--bleu);
+  outline: 2px solid var(--brun);
   outline-offset: 2px;
 }
 
@@ -232,7 +233,7 @@ footer p {
   color: var(--texte-doux);
 }
 .rgpd a {
-  color: var(--bleu);
+  color: var(--brun);
 }
 
 /* Bouton « Finaliser ma commande » : cohérent avec le CTA principal */
@@ -284,7 +285,7 @@ footer p {
 }
 #selection span {
   font-weight: 700;
-  color: var(--bleu);
+  color: var(--brun);
 }
 
 /* Modale de confirmation */
@@ -296,7 +297,7 @@ footer p {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(27, 58, 92, 0.8);
+  background: rgba(40, 28, 15, 0.8);
 }
 #confirmModal .content {
   background: var(--carte);
