@@ -38,6 +38,13 @@
   </svg>
 </header>
 
+<!-- Indicateur de défilement : invite à descendre vers le bouton de réservation.
+     Se masque dès le premier défilement (script plus bas). -->
+<a href="#reserve-button" class="scroll-hint" id="scrollHint" aria-label="Descendre vers la réservation">
+  <span class="scroll-hint-label">Réserver</span>
+  <span class="scroll-hint-arrow" aria-hidden="true"></span>
+</a>
+
   <!-- AUDIO -->
   <audio id="duck-sound" src="img/SF-coin.mp3" preload="auto"></audio>
 
@@ -153,6 +160,23 @@
 
 <!-- Script séparé -->
 <script src="commande.js"></script>
+
+<!-- Indicateur de défilement : masqué dès que la page a été scrollée. -->
+<script>
+  (function () {
+    var hint = document.getElementById("scrollHint");
+    if (!hint) return;
+    function update() {
+      if (window.scrollY > 40) {
+        hint.classList.add("is-hidden");
+      } else {
+        hint.classList.remove("is-hidden");
+      }
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
+</script>
 
 </body>
 </html>

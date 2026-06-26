@@ -18,6 +18,9 @@
 }
 
 /* Style global */
+html {
+  scroll-behavior: smooth; /* clic sur l'indicateur → descente douce vers le CTA */
+}
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
@@ -129,6 +132,58 @@ header {
 .reserve-button:hover {
   background: var(--orange-hover);
   transform: translateY(-2px);
+}
+
+/* Indicateur de défilement : pastille discrète fixée en bas de l'écran, avec
+   une flèche qui rebondit pour signaler qu'il faut descendre vers le bouton de
+   réservation. Masquée dès le premier défilement (.is-hidden, piloté par le
+   petit script inline dans index.html). */
+.scroll-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 18px;
+  border-radius: 50px;
+  background: var(--carte);
+  color: var(--brun);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92em;
+  box-shadow: var(--ombre);
+  opacity: 0.92;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.scroll-hint:hover {
+  opacity: 1;
+}
+.scroll-hint-arrow {
+  width: 11px;
+  height: 11px;
+  border-right: 3px solid var(--orange);
+  border-bottom: 3px solid var(--orange);
+  transform: rotate(45deg);
+  animation: scroll-bounce 1.4s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  50%      { transform: rotate(45deg) translate(3px, 3px); }
+}
+/* Une fois que l'utilisateur a commencé à scroller, l'indicateur s'efface. */
+.scroll-hint.is-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(14px);
+  pointer-events: none;
+}
+/* Accessibilité : pas d'animation si l'utilisateur a désactivé les animations. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-hint-arrow { animation: none; }
 }
 
 /* Bloc d'informations — même largeur/cadre que le bandeau CTA du héro.
